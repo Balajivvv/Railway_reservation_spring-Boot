@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Tickets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .ticket-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        span {
+            font-weight: bold;
+            color: #4CAF50; /* Green color for available numbers */
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Tickets</h1>
+    <div class="ticket-info">
+        <p>Available Lower Berths: <span th:text="${availableLowerBerths}"></span></p>
+        <p>Available Middle Berths: <span th:text="${availableMiddleBerths}"></span></p>
+        <p>Available Upper Berths: <span th:text="${availableUpperBerths}"></span></p>
+        <p>Available RACs: <span th:text="${availableRacTickets}"></span></p>
+        <p>Available Waiting List: <span th:text="${availableWaitingList}"></span></p>
+    </div>
+    <a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booked Tickets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td {
+            color: #555;
+        }
+
+        form {
+            display: inline;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+
+        .no-tickets {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Booked Tickets</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Passenger ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Alloted Berth</th>
+                <th>Seat Number</th> <!-- New column for Seat Number -->
+                <th>Booking Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="passenger : ${passengers}">
+                <td th:text="${passenger.passengerId}"></td>
+                <td th:text="${passenger.name}"></td>
+                <td th:text="${passenger.age}"></td>
+                <td th:text="${passenger.alloted}"></td>
+                <td th:text="${passenger.number}"></td> <!-- Display Seat Number -->
+                <td th:text="${passenger.alloted == 'WL' ? 'Waiting List' : 'Confirmed'}"></td>
+                <td>
+                    <form action="/cancel" method="post">
+                        <input type="hidden" name="passengerId" th:value="${passenger.passengerId}"/>
+                        <button type="submit">Cancel Ticket</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(passengers)}">
+                <td colspan="7" class="no-tickets">No booked tickets available.</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/">Back to Home</a>
+</body>
+</html>
